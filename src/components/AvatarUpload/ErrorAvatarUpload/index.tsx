@@ -1,13 +1,11 @@
 import attentionIcon from '../../../assets/attention.svg';
+import { useAvatarUploadContext } from '../../../hooks/useAvatarUploadContext';
 import Circle from '../../Circle';
 import CloseButton from '../../CloseButton';
 import { Container } from './style';
 
-type Props = {
-	resetState: () => void;
-};
-
-function ErrorAvatarUpload({ resetState }: Props) {
+function ErrorAvatarUpload() {
+	const { resetState } = useAvatarUploadContext();
 	return (
 		<Container>
 			<Circle>

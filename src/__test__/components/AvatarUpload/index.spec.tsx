@@ -1,6 +1,7 @@
 import { expect, it, vi } from 'vitest';
 import { fireEvent, getByText, render, waitFor } from '@testing-library/react';
 import AvatarUpload from '../../../components/AvatarUpload/index';
+import { AvatarUploadProvider } from '../../../contexts/AvatarUploadContext';
 
 describe('AvatarUpload', () => {
 	it('should render AvatarUpload', () => {
@@ -13,7 +14,11 @@ describe('AvatarUpload', () => {
 	});
 
 	it('should drop image', async () => {
-		const { getByTestId, queryByText } = render(<AvatarUpload />);
+		const { getByTestId, queryByText } = render(
+			<AvatarUploadProvider>
+				<AvatarUpload />
+			</AvatarUploadProvider>
+		);
 
 		const file = new File(['(⌐□_□)'], 'chucknorris.png', {
 			type: 'image/png',

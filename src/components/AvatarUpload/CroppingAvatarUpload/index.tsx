@@ -1,42 +1,21 @@
-import React from 'react';
-import { Area, Point } from 'react-easy-crop';
 import Cropper from './Cropper';
 import Slider from './Slider';
 import { Container } from './style';
 import CloseButton from '../../CloseButton';
+import { useAvatarUploadContext } from '../../../hooks/useAvatarUploadContext';
 
-type Props = {
-	zoom: number;
-	showCroppedImage: any;
-	setCrop: React.Dispatch<
-		React.SetStateAction<{
-			x: number;
-			y: number;
-		}>
-	>;
-	onCropComplete: (croppedArea: Area, croppedAreaPixels: Area) => void;
-	setZoom: React.Dispatch<React.SetStateAction<number>>;
-	image: string | null;
-	crop: {
-		x: number;
-		y: number;
-	};
-	setStatus: React.Dispatch<
-		React.SetStateAction<'default' | 'uploading' | 'success' | 'error'>
-	>;
-	resetState: () => void;
-};
+function CroppingAvatarUpload() {
+	const {
+		crop,
+		setCrop,
+		setZoom,
+		onCropComplete,
+		image,
+		zoom,
+		resetState,
+		showCroppedImage,
+	} = useAvatarUploadContext();
 
-function CroppingAvatarUpload({
-	crop,
-	image,
-	onCropComplete,
-	setZoom,
-	setCrop,
-	showCroppedImage,
-	zoom,
-	resetState,
-}: Props) {
 	return (
 		<Container>
 			<div>

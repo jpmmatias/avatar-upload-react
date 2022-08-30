@@ -1,16 +1,13 @@
 import { css } from '@emotion/css';
 import AvatarUpload from './components/AvatarUpload';
+import { AvatarUploadProvider } from './contexts/AvatarUploadContext';
 
 function App() {
 	return (
-		<div
-			className={css`
-				height: 90vh;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			`}>
-			<AvatarUpload />
+		<div className='app-container'>
+			<AvatarUploadProvider>
+				<AvatarUpload />
+			</AvatarUploadProvider>
 		</div>
 	);
 }

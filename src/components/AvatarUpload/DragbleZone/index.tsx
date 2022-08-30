@@ -1,22 +1,14 @@
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { useEffect } from 'react';
+import { useAvatarUploadContext } from '../../../hooks/useAvatarUploadContext';
 
 type Props = {
 	children: React.ReactNode;
-	onDrop:
-		| (<T extends File>(
-				acceptedFiles: T[],
-				fileRejections: FileRejection[],
-				event: DropEvent
-		  ) => void)
-		| undefined;
-	setStatus: React.Dispatch<
-		React.SetStateAction<'default' | 'uploading' | 'success' | 'error'>
-	>;
-	status: 'default' | 'uploading' | 'success' | 'error';
 };
 
-function DragbleZone({ children, onDrop, setStatus, status }: Props) {
+function DragbleZone({ children }: Props) {
+	const { onDrop, status, setStatus } = useAvatarUploadContext();
+
 	const { getRootProps, getInputProps, isDragReject } = useDropzone({
 		onDrop,
 		disabled: status === 'uploading' || status === 'error',

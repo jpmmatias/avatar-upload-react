@@ -45,4 +45,11 @@ injectGlobal`
     font-weight: 400;
     font-size: 14px ;
   }
+
+  .app-container {
+		height: 90vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+  }
 `;

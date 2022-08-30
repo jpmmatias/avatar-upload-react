@@ -2,14 +2,14 @@ import { Container } from './style';
 import uploadIcon from '../../../assets/upload.svg';
 import Circle from '../../Circle';
 import { css } from '@emotion/css';
-type Props = {
-	image: string | null | any;
-};
+import { useAvatarUploadContext } from '../../../hooks/useAvatarUploadContext';
 
-function DefaultAvatarUpload({ image }: Props) {
+function DefaultAvatarUpload() {
+	const { croppedImage } = useAvatarUploadContext();
+
 	return (
-		<Container uploaded={image ? true : false}>
-			{image && (
+		<Container uploaded={croppedImage ? true : false}>
+			{croppedImage && (
 				<Circle>
 					<img
 						className={css`
@@ -23,7 +23,7 @@ function DefaultAvatarUpload({ image }: Props) {
 							-webkit-user-select: none;
 							-ms-user-select: none;
 						`}
-						src={image}
+						src={croppedImage}
 						alt='Logo Image'
 					/>
 				</Circle>

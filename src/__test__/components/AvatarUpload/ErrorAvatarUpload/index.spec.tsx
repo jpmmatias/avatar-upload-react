@@ -1,12 +1,18 @@
 import { expect, it, vi } from 'vitest';
 import { fireEvent, render } from '@testing-library/react';
 import ErrorAvatarUpload from '../../../../components/AvatarUpload/ErrorAvatarUpload';
+import { AvatarUploadContextState } from '../../../../contexts/AvatarUploadContext';
+import {
+	AvatarUploadContext,
+	AvatarUploadProvider,
+} from '../../../../contexts/AvatarUploadContext';
 
 describe('ErrorAvatarUpload', () => {
 	it('should render ErrorAvatarUpload ', () => {
-		const resetState = vi.fn();
 		const { queryByText } = render(
-			<ErrorAvatarUpload resetState={resetState} />
+			<AvatarUploadProvider>
+				<ErrorAvatarUpload />
+			</AvatarUploadProvider>
 		);
 
 		expect(queryByText('Sorry, the upload failed.')).toBeInTheDocument();
@@ -14,16 +20,29 @@ describe('ErrorAvatarUpload', () => {
 	});
 
 	it('should  return to default state', () => {
-		const resetState = vi.fn();
+		const contextCallback = vi.fn();
 
 		const { getByAltText } = render(
-			<ErrorAvatarUpload resetState={resetState} />
+			<AvatarUploadProvider>
+				<ErrorAvatarUpload />
+				<AvatarUploadContext.Consumer>
+					{contextCallback}
+				</AvatarUploadContext.Consumer>
+			</AvatarUploadProvider>
 		);
 
 		const button = getByAltText('Close Icon');
 
 		fireEvent.click(button);
 
-		expect(resetState).toHaveBeenCalled();
+		contextCallback(
+			({
+				resetState,
+			}: {
+				resetState: AvatarUploadContextState['resetState'];
+			}) => {
+				expect(resetState).toHaveBeenCalled();
+			}
+		);
 	});
 });
